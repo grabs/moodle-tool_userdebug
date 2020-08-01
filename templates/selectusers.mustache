@@ -1,0 +1,74 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template tool_userdebug/selectusers
+
+    Moodle template to display the user select form.
+
+    Classes required for JS:
+    * none
+
+    Context variables required for this template:
+    * none
+
+    Example context (json):
+    {
+        "formurl" : "https://www.example.org/admin/tool/userdebug/index.php",
+        "sesskey" : "abc123",
+        "userselectbox": "<div>...</div>",
+        "potentialuserselectbox": "<div>...</div>"
+    }
+}}
+<div id="selectuser-{{uniqid}}">
+    <h3 class="main">{{#str}} manage_debugusers, tool_userdebug{{/str}}</h3>
+
+    <form id="selectuserform-{{uniqid}}" method="post" action="{{{formurl}}}">
+        <div>
+            <input type="hidden" name="sesskey" value="{{sesskey}}" />
+            <table class="generaltable generalbox groupmanagementtable boxaligncenter" summary="">
+                <tr>
+                    <td id="existingcell">
+                        <p>
+                            <label for="removeselect">{{#str}} current_debugusers, tool_userdebug{{/str}}</label>
+                        </p>
+                        {{{userselectbox}}}
+                    </td>
+                    <td id="buttonscell">
+                        <div id="addcontrols">
+                            <button name="add" value="1" id="add" type="submit" title="{{#str}} add{{/str}}" class="btn btn-secondary form-control">
+                                <i class="fa fa-arrow-left"></i> {{#str}} add{{/str}}
+                            </button>
+
+                        </div>
+                        <div id="removecontrols">
+                            <button name="remove" value="1" id="remove" type="submit" title="{{#str}} remove{{/str}}" class="btn btn-secondary form-control">
+                                {{#str}} remove{{/str}} <i class="fa fa-arrow-right"></i>
+                            </button>
+
+                        </div>
+                    </td>
+                    <td id="potentialcell">
+                        <p>
+                            <label for="addselect">{{#str}} users{{/str}}</label>
+                        </p>
+                        {{{potentialuserselectbox}}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>

@@ -21,10 +21,20 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace tool_userdebug\output;
+
 defined('MOODLE_INTERNAL') || die;
 
-if ($hassiteconfig) {
-    $ADMIN->add('development', new admin_externalpage('tool_userdebug',
-            get_string('pluginname', 'tool_userdebug'),
-            new moodle_url('/admin/tool/userdebug/index.php')));
+class debugsettings implements \templatable, \renderable {
+    private $data;
+
+    public function __construct(\tool_userdebug\settingsform $form) {
+        $this->data = new \stdClass();
+        $this->data->form = $form->get_output();
+        $this->data->open = !empty($_COOKIE["debugsettingsopen"]) ? $_COOKIE["debugsettingsopen"] : '';
+    }
+
+    public function export_for_template(\renderer_base $output) {
+        return $this->data;
+    }
 }

@@ -27,4 +27,6 @@ if (defined('ABORT_AFTER_CONFIG')) {
     return;
 }
 
-tool_userdebug\util::setdebug();
+function tool_userdebug_after_config() {
+    tool_userdebug\util::setdebug();
+}

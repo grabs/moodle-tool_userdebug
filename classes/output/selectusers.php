@@ -21,10 +21,25 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace tool_userdebug\output;
+use tool_userdebug\selector;
+use tool_userdebug\potential_selector;
+
 defined('MOODLE_INTERNAL') || die;
 
-if ($hassiteconfig) {
-    $ADMIN->add('development', new admin_externalpage('tool_userdebug',
-            get_string('pluginname', 'tool_userdebug'),
-            new moodle_url('/admin/tool/userdebug/index.php')));
+class selectusers implements \templatable, \renderable {
+    private $data;
+
+    public function __construct($url, selector $userselector, potential_selector $potentialuserselector) {
+        $this->data = new \stdClass();
+        $this->data->formurl = $url;
+        $this->data->sesskey = sesskey();
+        $this->data->userselectbox = $userselector->display(true);
+        $this->data->potentialuserselectbox = $potentialuserselector->display(true);
+
+    }
+
+    public function export_for_template(\renderer_base $output) {
+        return $this->data;
+    }
 }

@@ -37,26 +37,30 @@ class util {
             // Some parts of Moodle cannot display errors and debug at all.
             ini_set('display_errors', '0');
             ini_set('log_errors', '1');
-        } else if ($CFG->tool_userdebug_mode) {
-
+        } else {
             $userids = explode(',', $CFG->tool_userdebug_users);
             if (in_array($USER->id, $userids)) {
+
                 if (!empty($CFG->tool_userdebug_mode)) {
                     error_reporting($CFG->tool_userdebug_mode);
                     $CFG->debug = $CFG->tool_userdebug_mode;
+                    $CFG->debugdeveloper = (($CFG->debug & DEBUG_DEVELOPER) === DEBUG_DEVELOPER);
                 }
 
-                $CFG->debugsmtp = !empty($CFG->tool_userdebug_debugsmtp);
-                $CFG->perfdebug = !empty($CFG->tool_userdebug_perfdebug) ? $CFG->tool_userdebug_perfdebug : 0;
+                $CFG->debugsmtp     = !empty($CFG->tool_userdebug_debugsmtp);
+                $CFG->debugimap     = !empty($CFG->tool_userdebug_debugimap);
+                $CFG->perfdebug     = !empty($CFG->tool_userdebug_perfdebug) ? $CFG->tool_userdebug_perfdebug : 0;
                 $CFG->debugpageinfo = !empty($CFG->tool_userdebug_debugpageinfo);
 
                 if (!empty($CFG->tool_userdebug_debugstringids)) {
                     $CFG->debugstringids = $CFG->tool_userdebug_debugstringids;
                     $_GET['strings'] = 1;
                 }
+                if (!empty($CFG->tool_userdebug_debugdisplay)) {
+                    ini_set('display_errors', '1');
+                    $CFG->debugdisplay = true;
+                }
             }
-            ini_set('display_errors', '1');
-            $CFG->debugdisplay = true;
         }
     }
 }

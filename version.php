@@ -23,8 +23,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2018121100;
-$plugin->release   = '3.5 (2018121100)';
-$plugin->requires  = 2018050800;
+$plugin->version   = 2020080100;
+$plugin->release   = '3.9 (2020080100)';
+$plugin->requires  = 2019111200;
 $plugin->maturity  = MATURITY_BETA;
 $plugin->component = 'tool_userdebug';

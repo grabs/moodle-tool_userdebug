@@ -35,8 +35,7 @@ class settingsform extends \moodleform {
 
         $mform =& $this->_form;
 
-        // Add a headline.
-        $mform->addElement('header', 'general', get_string('debugoptions', 'tool_userdebug'));
+        $mform->addElement('header', 'headergeneral', get_string('debug', 'admin'));
 
         $debugmode = array(DEBUG_NONE      => get_string('debugnone', 'admin'),
             DEBUG_MINIMAL   => get_string('debugminimal', 'admin'),
@@ -50,23 +49,57 @@ class settingsform extends \moodleform {
             $mform->setDefault('debugmode', $CFG->tool_userdebug_mode);
         }
 
-        $mform->addElement('checkbox', 'debugsmtp',
-                            get_string('debugsmtp', 'admin'));
+        $mform->addElement(
+            'checkbox',
+            'debugdisplay',
+            get_string('debugdisplay', 'admin')
+        );
+        $mform->setDefault('debugdisplay', !empty($CFG->tool_userdebug_debugdisplay));
+
+        $mform->addElement(
+            'checkbox',
+            'debugsmtp',
+            get_string('debugsmtp', 'tool_userdebug')
+        );
         $mform->setDefault('debugsmtp', !empty($CFG->tool_userdebug_debugsmtp));
 
-        $mform->addElement('checkbox', 'perfdebug',
-                            get_string('perfdebug', 'admin'));
+        $mform->addElement(
+            'checkbox',
+            'debugimap',
+            get_string('debugimap', 'tool_userdebug')
+        );
+        $mform->setDefault('debugimap', !empty($CFG->tool_userdebug_debugimap));
+
+        $mform->addElement(
+            'checkbox',
+            'perfdebug',
+            get_string('perfdebug', 'admin')
+        );
         $mform->setDefault('perfdebug', !empty($CFG->tool_userdebug_perfdebug));
 
-        $mform->addElement('checkbox', 'debugstringids',
-                            get_string('debugstringids', 'admin'));
+        $mform->addElement(
+            'checkbox',
+            'debugstringids',
+            get_string('debugstringids', 'admin')
+        );
         $mform->setDefault('debugstringids', !empty($CFG->tool_userdebug_debugstringids));
 
-        $mform->addElement('checkbox', 'debugpageinfo',
-                            get_string('debugpageinfo', 'admin'));
+        $mform->addElement(
+            'checkbox',
+            'debugpageinfo',
+            get_string('debugpageinfo', 'admin')
+        );
         $mform->setDefault('debugpageinfo', !empty($CFG->tool_userdebug_debugpageinfo));
 
         // Add the save button.
         $mform->addElement('submit', 'savechanges', get_string('savechanges'));
+    }
+
+    public function get_output() {
+        ob_start();
+        $this->display();
+        $output = ob_get_contents();
+        ob_end_clean();
+        return $output;
     }
 }
