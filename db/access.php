@@ -21,10 +21,13 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020081600;
-$plugin->release   = '3.9 (2020081600)';
-$plugin->requires  = 2019111200;
-$plugin->maturity  = MATURITY_BETA;
-$plugin->component = 'tool_userdebug';
+$capabilities = array(
+
+    'tool/userdebug:adhocdebug' => array(
+        'riskbitmask' => RISK_PERSONAL,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+    ),
+);

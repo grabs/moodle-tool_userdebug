@@ -21,10 +21,22 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+use tool_userdebug\util;
 
-$plugin->version   = 2020081600;
-$plugin->release   = '3.9 (2020081600)';
-$plugin->requires  = 2019111200;
-$plugin->maturity  = MATURITY_BETA;
-$plugin->component = 'tool_userdebug';
+require_once(dirname(__FILE__).'/../../../config.php');
+
+require_login();
+$context = \context_system::instance();
+require_capability('tool/userdebug:adhocdebug', $context);
+
+$returnpath = optional_param('returnpath', '/', PARAM_URL);
+$returnurl = new \moodle_url($returnpath);
+
+$myurl = new \moodle_url($FULLME);
+$myurl->remove_all_params();
+
+$PAGE->set_context($context);
+$PAGE->set_url($myurl);
+
+util::set_adhoc_debug(!util::is_adhoc_debug());
+redirect($returnurl);

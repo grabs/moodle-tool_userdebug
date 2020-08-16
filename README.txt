@@ -15,6 +15,10 @@ Copy this plugin into the folder "admin/tool" inside your moodle installation.
 2)
 Go to the "Site administration -> Notifications" to start the install process.
 
+3)
+Go to your config.php and add the following line at the end:
+require_once($CFG->dirroot.'/admin/tool/userdebug/lib.php');
+
 Usage:
 ------
 After the installation you will find the new link "User related debugmodus"
