@@ -29,8 +29,8 @@
     {
         "formurl" : "https://www.example.org/admin/tool/userdebug/index.php",
         "sesskey" : "abc123",
-        "userselectbox": "<div>...</div>",
-        "potentialuserselectbox": "<div>...</div>"
+        "userselectbox": "<div><input type="text" name="removeselect" id="removeselect" /></div>",
+        "potentialuserselectbox": "<div><input type="text" name="addselect" id="addselect" /></div>"
     }
 }}
 <div id="selectuser-{{uniqid}}">
@@ -39,7 +39,7 @@
     <form id="selectuserform-{{uniqid}}" method="post" action="{{{formurl}}}">
         <div>
             <input type="hidden" name="sesskey" value="{{sesskey}}" />
-            <table class="generaltable generalbox groupmanagementtable boxaligncenter" summary="">
+            <table class="generaltable generalbox groupmanagementtable boxaligncenter">
                 <tr>
                     <td id="existingcell">
                         <p>

@@ -1,6 +1,6 @@
 @tool @tool_userdebug
 
-Feature: Switch to adhoc debugging
+Feature: Assign users to user related debugging
   In order to switch to adhoc debugging
 
   Background:
