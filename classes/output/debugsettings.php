@@ -14,26 +14,37 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * @package    tool
- * @subpackage userdebug
- * @copyright  2018 Andreas Grabs <moodle@grabs-edv.de>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace tool_userdebug\output;
 
-defined('MOODLE_INTERNAL') || die;
-
+/**
+ * Output component for the debug settings page
+ *
+ * @package    tool_userdebug
+ * @author     Andreas Grabs <moodle@grabs-edv.de>
+ * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class debugsettings implements \templatable, \renderable {
+    /** @var \stdClass */
     private $data;
 
+    /**
+     * Constructor
+     *
+     * @param \tool_userdebug\settingsform $form
+     */
     public function __construct(\tool_userdebug\settingsform $form) {
         $this->data = new \stdClass();
         $this->data->form = $form->get_output();
         $this->data->open = !empty($_COOKIE["debugsettingsopen"]) ? $_COOKIE["debugsettingsopen"] : '';
     }
 
+    /**
+     * Get the context data for mustache
+     *
+     * @param \renderer_base $output
+     * @return \stdClass|array
+     */
     public function export_for_template(\renderer_base $output) {
         return $this->data;
     }

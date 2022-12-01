@@ -14,17 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * @package    tool
- * @subpackage userdebug
- * @copyright  2018 Andreas Grabs <moodle@grabs-edv.de>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace tool_userdebug;
 
-defined('MOODLE_INTERNAL') || die;
-
+/**
+ * User selector for potential users
+ *
+ * @package    tool_userdebug
+ * @author     Andreas Grabs <moodle@grabs-edv.de>
+ * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class potential_selector extends \user_selector_base {
 
     /**

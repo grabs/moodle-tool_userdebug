@@ -15,16 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    tool
- * @subpackage userdebug
- * @copyright  2018 Andreas Grabs <moodle@grabs-edv.de>
+ * Version definition
+ *
+ * @package    tool_userdebug
+ * @author     Andreas Grabs <moodle@grabs-edv.de>
+ * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2020081600;
-$plugin->release   = '3.9 (2020081601)';
+$plugin->version   = 2022120100;
+$plugin->release   = 'v4.1 (2022120100)';
 $plugin->requires  = 2019111200;
 $plugin->maturity  = MATURITY_BETA;
 $plugin->component = 'tool_userdebug';

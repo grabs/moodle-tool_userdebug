@@ -15,9 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    tool
- * @subpackage userdebug
- * @copyright  2018 Andreas Grabs <moodle@grabs-edv.de>
+ * Print the settings page
+ *
+ * @package    tool_userdebug
+ * @author     Andreas Grabs <moodle@grabs-edv.de>
+ * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -42,7 +44,7 @@ $potentialdebuguserselector = new \tool_userdebug\potential_selector();
 
 $formdata = $settingsform->get_data();
 
-if (optional_param('add', false, PARAM_BOOL) and confirm_sesskey()) {
+if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
     if ($userstoadd = $potentialdebuguserselector->get_selected_users()) {
         $usertoadd = reset($userstoadd);
         $debugusers = [];
@@ -58,7 +60,7 @@ if (optional_param('add', false, PARAM_BOOL) and confirm_sesskey()) {
         redirect($PAGE->url);
         die;
     }
-} else if (optional_param('remove', false, PARAM_BOOL) and confirm_sesskey()) {
+} else if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
     if ($userstoremove = $debuguserselector->get_selected_users()) {
         $usertoremove = reset($userstoremove);
         $debugusers = [];

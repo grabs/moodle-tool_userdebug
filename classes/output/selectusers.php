@@ -14,22 +14,29 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * @package    tool
- * @subpackage userdebug
- * @copyright  2018 Andreas Grabs <moodle@grabs-edv.de>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace tool_userdebug\output;
 use tool_userdebug\selector;
 use tool_userdebug\potential_selector;
 
-defined('MOODLE_INTERNAL') || die;
-
+/**
+ * Output component for the user selection page
+ *
+ * @package    tool_userdebug
+ * @author     Andreas Grabs <moodle@grabs-edv.de>
+ * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class selectusers implements \templatable, \renderable {
+    /** @var \stdClass */
     private $data;
 
+    /**
+     * Constructor
+     *
+     * @param string|\moodle_url $url
+     * @param selector $userselector
+     * @param potential_selector $potentialuserselector
+     */
     public function __construct($url, selector $userselector, potential_selector $potentialuserselector) {
         $this->data = new \stdClass();
         $this->data->formurl = $url;
@@ -39,6 +46,12 @@ class selectusers implements \templatable, \renderable {
 
     }
 
+    /**
+     * Get the context data for mustache
+     *
+     * @param \renderer_base $output
+     * @return \stdClass|array
+     */
     public function export_for_template(\renderer_base $output) {
         return $this->data;
     }
