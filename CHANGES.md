@@ -1,6 +1,9 @@
 ## Release notes
 
-### Release v4.1 (2022120100)
+### Release v4.2
+* Modify github actions
+
+### Release v4.1
 * Put the settings in addition to the $CFG into $CFG->config_php_settings to prevent accidental saving of the settings.
 * Add behat testing features
 * Optimization of coding style
