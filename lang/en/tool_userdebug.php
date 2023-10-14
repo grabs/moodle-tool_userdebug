@@ -15,21 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language definition
+ * Language definition.
  *
  * @package    tool_userdebug
  * @author     Andreas Grabs <moodle@grabs-edv.de>
  * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-$string['adhocdebug'] = 'Ad hoc debug ({$a})';
-$string['current_debugusers'] = 'Current debug users';
-$string['debugimap'] = 'Debug imap';
-$string['debugmode'] = 'Debug mode';
-$string['debugsmtp'] = 'Debug smtp';
-$string['debugoptions'] = 'Debug options';
-$string['manage_debugusers'] = 'Manage debug users';
-$string['pluginname'] = 'User related debugmodus';
-$string['privacy:metadata'] = 'The plugin "User related debugmodus" does not store any personal data. But it sets a cookie "debugsettingsopen" for convenience.';
+$string['adhocdebug']           = 'Ad hoc debug ({$a})';
+$string['current_debugusers']   = 'Current debug users';
+$string['debugimap']            = 'Debug imap';
+$string['debugmode']            = 'Debug mode';
+$string['debugsmtp']            = 'Debug smtp';
+$string['debugoptions']         = 'Debug options';
+$string['manage_debugusers']    = 'Manage debug users';
+$string['pluginname']           = 'User related debugmodus';
+$string['privacy:metadata']     = 'The plugin "User related debugmodus" does not store any personal data. But it sets a cookie "debugsettingsopen" for convenience.';
 $string['userdebug:adhocdebug'] = 'Use ad hoc debugging';

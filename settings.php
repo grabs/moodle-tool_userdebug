@@ -15,18 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Settings definition shows only the link to index.php which has a settings form
+ * Settings definition shows only the link to index.php which has a settings form.
  *
  * @package    tool_userdebug
  * @author     Andreas Grabs <moodle@grabs-edv.de>
  * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) {
     $ADMIN->add('development', new admin_externalpage('tool_userdebug',
-            get_string('pluginname', 'tool_userdebug'),
-            new moodle_url('/admin/tool/userdebug/index.php')));
+        get_string('pluginname', 'tool_userdebug'),
+        new moodle_url('/admin/tool/userdebug/index.php')));
 }

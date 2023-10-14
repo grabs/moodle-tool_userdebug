@@ -17,7 +17,7 @@
 namespace tool_userdebug;
 
 /**
- * Utility class to manage the user defined debuging mode
+ * Utility class to manage the user defined debuging mode.
  *
  * @package    tool_userdebug
  * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
@@ -26,9 +26,9 @@ namespace tool_userdebug;
  */
 class util {
     /**
-     * Set the adhoc debug mode on or off
+     * Set the adhoc debug mode on or off.
      *
-     * @param bool $on
+     * @param  bool $on
      * @return void
      */
     public static function set_adhoc_debug($on = true) {
@@ -42,7 +42,7 @@ class util {
     }
 
     /**
-     * Check whether or not the adhoc debug mode is active
+     * Check whether or not the adhoc debug mode is active.
      *
      * @return bool
      */
@@ -53,7 +53,7 @@ class util {
     }
 
     /**
-     * Activate the debug mode for the current user if he is defined in $CFG->tool_userdebug_users {@see:static::enable_debugging}
+     * Activate the debug mode for the current user if he is defined in $CFG->tool_userdebug_users {@see:static::enable_debugging}.
      *
      * @return void
      */
@@ -71,7 +71,7 @@ class util {
 
         if (!empty($CFG->tool_userdebug_users)) {
             $userids = explode(',', $CFG->tool_userdebug_users);
-            if (in_array($USER->id, $userids)) {
+            if (in_array($USER->id, $userids, true)) {
                 $debugactive = true;
             }
         }
@@ -105,7 +105,7 @@ class util {
 
         if (!empty($CFG->tool_userdebug_mode)) {
             error_reporting($CFG->tool_userdebug_mode);
-            $debugcfg->debug = $CFG->tool_userdebug_mode;
+            $debugcfg->debug          = $CFG->tool_userdebug_mode;
             $debugcfg->debugdeveloper = (($debugcfg->debug & DEBUG_DEVELOPER) === DEBUG_DEVELOPER);
         }
 
@@ -116,7 +116,7 @@ class util {
 
         if (!empty($CFG->tool_userdebug_debugstringids)) {
             $debugcfg->debugstringids = $CFG->tool_userdebug_debugstringids;
-            $_GET['strings'] = 1;
+            $_GET['strings']          = 1;
         }
         if (!empty($CFG->tool_userdebug_debugdisplay)) {
             ini_set('display_errors', '1');
@@ -127,9 +127,9 @@ class util {
     }
 
     /**
-     * This put all CFG values actually in the $CFG and $CFG->config_php_settings
+     * This put all CFG values actually in the $CFG and $CFG->config_php_settings.
      *
-     * @param \stdClass $debugcfg
+     * @param  \stdClass $debugcfg
      * @return void
      */
     private static function set_debug_in_cfg($debugcfg) {
@@ -140,7 +140,7 @@ class util {
         }
 
         if (empty($CFG->config_php_settings)) {
-            $CFG->config_php_settings = array();
+            $CFG->config_php_settings = [];
         }
         foreach ($debugcfg as $setting => $value) {
             $CFG->config_php_settings[$setting] = $value;
@@ -148,7 +148,7 @@ class util {
     }
 
     /**
-     * Create a settings node for the extended navigation
+     * Create a settings node for the extended navigation.
      *
      * @return \navigation_node
      */
@@ -156,13 +156,13 @@ class util {
         global $PAGE;
 
         $returnpath = $PAGE->url;
-        $url = new \moodle_url('/admin/tool/userdebug/adhocdebug.php', array('returnpath' => $returnpath));
+        $url        = new \moodle_url('/admin/tool/userdebug/adhocdebug.php', ['returnpath' => $returnpath]);
 
         if (static::is_adhoc_debug()) {
-            $pixicon = 'debugon';
+            $pixicon  = 'debugon';
             $strstate = 'on';
         } else {
-            $pixicon = 'debugoff';
+            $pixicon  = 'debugoff';
             $strstate = 'off';
         }
         $title = get_string('adhocdebug', 'tool_userdebug', $strstate);
@@ -173,9 +173,29 @@ class util {
             \navigation_node::TYPE_CUSTOM,
             null,
             null,
-            new \pix_icon($pixicon, 'ad hoc debug', 'tool_userdebug')
+            new \pix_icon($pixicon, $title, 'tool_userdebug')
         );
 
         return $settingsnode;
     }
+
+    /**
+     * Create a rendered action element for user navigation (Top navigation left from user avatar).
+     *
+     * @return string The html
+     */
+    public static function create_nav_action() {
+        global $OUTPUT;
+
+        if (!$navigationnode = static::get_settings_node()) {
+            return '';
+        }
+
+        $content = new \stdClass();
+        $content->text = $navigationnode->text;
+        $content->url = $navigationnode->action;
+        $content->icon = $OUTPUT->render($navigationnode->icon);
+        return $OUTPUT->render_from_template('tool_userdebug/navbar_action', $content);
+    }
+
 }

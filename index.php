@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Print the settings page
+ * Print the settings page.
  *
  * @package    tool_userdebug
  * @author     Andreas Grabs <moodle@grabs-edv.de>
@@ -23,8 +23,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(dirname(__FILE__).'/../../../config.php');
-require_once($CFG->libdir.'/adminlib.php');
+require_once(__DIR__ . '/../../../config.php');
+require_once($CFG->libdir . '/adminlib.php');
 require_once($CFG->dirroot . '/' . $CFG->admin . '/tool/userdebug/lib.php');
 require_once($CFG->dirroot . '/' . $CFG->admin . '/roles/lib.php');
 
@@ -39,17 +39,17 @@ if (empty($CFG->tool_userdebug_users)) {
 
 $settingsform = new \tool_userdebug\settingsform();
 
-$debuguserselector = new \tool_userdebug\selector();
+$debuguserselector          = new \tool_userdebug\selector();
 $potentialdebuguserselector = new \tool_userdebug\potential_selector();
 
 $formdata = $settingsform->get_data();
 
 if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
     if ($userstoadd = $potentialdebuguserselector->get_selected_users()) {
-        $usertoadd = reset($userstoadd);
+        $usertoadd  = reset($userstoadd);
         $debugusers = [];
         foreach (explode(',', $CFG->tool_userdebug_users) as $du) {
-            $du = (int)$du;
+            $du = (int) $du;
             if ($du) {
                 $debugusers[$du] = $du;
             }
@@ -63,9 +63,9 @@ if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
 } else if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
     if ($userstoremove = $debuguserselector->get_selected_users()) {
         $usertoremove = reset($userstoremove);
-        $debugusers = [];
+        $debugusers   = [];
         foreach (explode(',', $CFG->tool_userdebug_users) as $du) {
-            $du = (int)$du;
+            $du = (int) $du;
             if ($du) {
                 $debugusers[$du] = $du;
             }
@@ -97,7 +97,7 @@ if (!empty($formdata->savechanges)) {
     redirect($PAGE->url, get_string('changessaved'), 3);
 }
 
-$selectusers = new \tool_userdebug\output\selectusers($PAGE->url, $debuguserselector, $potentialdebuguserselector);
+$selectusers   = new \tool_userdebug\output\selectusers($PAGE->url, $debuguserselector, $potentialdebuguserselector);
 $debugsettings = new \tool_userdebug\output\debugsettings($settingsform);
 
 // Print header.

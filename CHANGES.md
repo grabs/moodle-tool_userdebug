@@ -1,5 +1,9 @@
 ## Release notes
 
+### Release v4.3
+* Add icon for ad hoc debuggin to the usernavigation on top of the page.
+* Adjust new coding style rules for arrays.
+
 ### Release v4.2
 * Modify github actions
 

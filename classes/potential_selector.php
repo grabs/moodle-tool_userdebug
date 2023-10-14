@@ -17,7 +17,7 @@
 namespace tool_userdebug;
 
 /**
- * User selector for potential users
+ * User selector for potential users.
  *
  * @package    tool_userdebug
  * @author     Andreas Grabs <moodle@grabs-edv.de>
@@ -25,20 +25,19 @@ namespace tool_userdebug;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class potential_selector extends \user_selector_base {
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct() {
         global $CFG, $USER;
         $admins = clean_param_array(explode(',', $CFG->tool_userdebug_users), PARAM_INT);
-        parent::__construct('addselect', array('multiselect' => false, 'exclude' => $admins));
+        parent::__construct('addselect', ['multiselect' => false, 'exclude' => $admins]);
     }
 
     /**
      * Searches the potential users.
      *
-     * @param string $search
+     * @param  string  $search
      * @return array()
      */
     public function find_users($search) {
@@ -50,7 +49,7 @@ class potential_selector extends \user_selector_base {
 
         $sql = " FROM {user}
                 WHERE $wherecondition AND mnethostid = :localmnet";
-        $order = ' ORDER BY lastname ASC, firstname ASC';
+        $order               = ' ORDER BY lastname ASC, firstname ASC';
         $params['localmnet'] = $CFG->mnet_localhost_id;
 
         // Check to see if there are too many to show sensibly.
@@ -64,7 +63,7 @@ class potential_selector extends \user_selector_base {
         $availableusers = $DB->get_records_sql($fields . $sql . $order, $params);
 
         if (empty($availableusers)) {
-            return array();
+            return [];
         }
 
         if ($search) {
@@ -73,7 +72,7 @@ class potential_selector extends \user_selector_base {
             $groupname = get_string('potusers', 'role');
         }
 
-        return array($groupname => $availableusers);
+        return [$groupname => $availableusers];
     }
 
     /**
@@ -83,9 +82,9 @@ class potential_selector extends \user_selector_base {
      */
     protected function get_options() {
         global $CFG;
-        $options = parent::get_options();
+        $options         = parent::get_options();
         $options['file'] = $CFG->admin . '/roles/lib.php';
+
         return $options;
     }
 }
-

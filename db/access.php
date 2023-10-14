@@ -15,21 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Capability definition
+ * Capability definition.
  *
  * @package    tool_userdebug
  * @author     Andreas Grabs <moodle@grabs-edv.de>
  * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die;
 
-defined('MOODLE_INTERNAL') || die();
-
-$capabilities = array(
-
-    'tool/userdebug:adhocdebug' => array(
-        'riskbitmask' => RISK_PERSONAL,
-        'captype' => 'read',
+$capabilities = [
+    'tool/userdebug:adhocdebug' => [
+        'riskbitmask'  => RISK_PERSONAL,
+        'captype'      => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
-    ),
-);
+    ],
+];

@@ -17,7 +17,7 @@
 namespace tool_userdebug;
 
 /**
- * User selector class
+ * User selector class.
  *
  * @package    tool_userdebug
  * @author     Andreas Grabs <moodle@grabs-edv.de>
@@ -25,19 +25,18 @@ namespace tool_userdebug;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class selector extends \user_selector_base {
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct() {
         global $CFG, $USER;
-        parent::__construct('removeselect', array('multiselect' => false));
+        parent::__construct('removeselect', ['multiselect' => false]);
     }
 
     /**
      * Searches the potential users.
      *
-     * @param string $search
+     * @param  string  $search
      * @return array()
      */
     public function find_users($search) {
@@ -47,7 +46,7 @@ class selector extends \user_selector_base {
         $fields      = 'SELECT ' . $this->required_fields_sql('');
         $countfields = 'SELECT COUNT(1)';
 
-        $tooluserdebugusers = clean_param_array(explode(',', $CFG->tool_userdebug_users), PARAM_INT);
+        $tooluserdebugusers      = clean_param_array(explode(',', $CFG->tool_userdebug_users), PARAM_INT);
         list($debugid, $params2) = $DB->get_in_or_equal($tooluserdebugusers, SQL_PARAMS_NAMED, 'val');
 
         if ($wherecondition) {
@@ -64,10 +63,10 @@ class selector extends \user_selector_base {
         $availableusers = $DB->get_records_sql($fields . $sql . $order, $params);
 
         if (empty($availableusers)) {
-            return array();
+            return [];
         }
 
-        $result = array();
+        $result = [];
 
         if ($availableusers) {
             if ($search) {
@@ -88,8 +87,9 @@ class selector extends \user_selector_base {
      */
     protected function get_options() {
         global $CFG;
-        $options = parent::get_options();
+        $options         = parent::get_options();
         $options['file'] = $CFG->admin . '/roles/lib.php';
+
         return $options;
     }
 }

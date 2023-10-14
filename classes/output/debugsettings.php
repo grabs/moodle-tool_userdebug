@@ -17,7 +17,7 @@
 namespace tool_userdebug\output;
 
 /**
- * Output component for the debug settings page
+ * Output component for the debug settings page.
  *
  * @package    tool_userdebug
  * @author     Andreas Grabs <moodle@grabs-edv.de>
@@ -29,20 +29,20 @@ class debugsettings implements \templatable, \renderable {
     private $data;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \tool_userdebug\settingsform $form
      */
     public function __construct(\tool_userdebug\settingsform $form) {
-        $this->data = new \stdClass();
+        $this->data       = new \stdClass();
         $this->data->form = $form->get_output();
-        $this->data->open = !empty($_COOKIE["debugsettingsopen"]) ? $_COOKIE["debugsettingsopen"] : '';
+        $this->data->open = !empty($_COOKIE['debugsettingsopen']) ? $_COOKIE['debugsettingsopen'] : '';
     }
 
     /**
-     * Get the context data for mustache
+     * Get the context data for mustache.
      *
-     * @param \renderer_base $output
+     * @param  \renderer_base  $output
      * @return \stdClass|array
      */
     public function export_for_template(\renderer_base $output) {

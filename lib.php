@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Collection of hook function to manipulate the navigation and start the debug mode
+ * Collection of hook function to manipulate the navigation and start the debug mode.
  *
  * @package    tool_userdebug
  * @author     Andreas Grabs <moodle@grabs-edv.de>
@@ -32,7 +32,7 @@ if (defined('ABORT_AFTER_CONFIG')) {
 }
 
 /**
- * Hook function is called at the end of setup.php
+ * Hook function is called at the end of setup.php.
  *
  * @return void
  */
@@ -41,14 +41,27 @@ function tool_userdebug_after_config() {
 }
 
 /**
- * This function extends the frontpage navigation
+ * Allow plugins to provide some content to be rendered in the navbar.
+ * The plugin must define a PLUGIN_render_navbar_output function that returns
+ * the HTML they wish to add to the navbar.
+ *
+ * @return string HTML for the navbar
+ */
+function tool_userdebug_render_navbar_output() {
+    if (!has_capability('tool/userdebug:adhocdebug', \context_system::instance())) {
+        return '';
+    }
+    return util::create_nav_action();
+}
+
+/**
+ * This function extends the frontpage navigation.
  *
  * @param navigation_node $parentnode The navigation node to extend
  * @param stdClass        $course     The course to object for the tool
  * @param context_course  $context    The context of the course
  */
 function tool_userdebug_extend_navigation_frontpage(navigation_node $parentnode, stdClass $course, context_course $context) {
-
     if (!has_capability('tool/userdebug:adhocdebug', \context_system::instance())) {
         return;
     }
@@ -58,16 +71,15 @@ function tool_userdebug_extend_navigation_frontpage(navigation_node $parentnode,
 /**
  * Extend the user settings navigation.
  *
- * @param navigation_node $parentnode
- * @param stdClass $user
- * @param context_user $context
- * @param stdClass $course
- * @param context_course $coursecontext
+ * @param  navigation_node $parentnode
+ * @param  stdClass        $user
+ * @param  context_user    $context
+ * @param  stdClass        $course
+ * @param  context_course  $coursecontext
  * @return void
  */
 function tool_userdebug_extend_navigation_user_settings(navigation_node $parentnode, stdClass $user, context_user $context,
-                                                        stdClass $course, context_course $coursecontext) {
-
+    stdClass $course, context_course $coursecontext) {
     if (!has_capability('tool/userdebug:adhocdebug', \context_system::instance())) {
         return;
     }
@@ -82,10 +94,10 @@ function tool_userdebug_extend_navigation_user_settings(navigation_node $parentn
  */
 function tool_userdebug_get_fontawesome_icon_map() {
     // We build a map of some icons we use in the flatnav.
-    $iconmap = array(
-        'tool_userdebug:debugon' => 'fa-bug text-success',
-        'tool_userdebug:debugoff' => 'fa-bug text-error',
-    );
+    $iconmap = [
+        'tool_userdebug:debugon'  => 'fa-bug text-danger',
+        'tool_userdebug:debugoff' => 'fa-bug',
+    ];
 
     return $iconmap;
 }

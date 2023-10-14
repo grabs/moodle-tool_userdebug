@@ -18,12 +18,12 @@ namespace tool_userdebug;
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->libdir.'/formslib.php');
-require_once($CFG->libdir.'/adminlib.php');
-require_once($CFG->dirroot.'/user/selector/lib.php');
+require_once($CFG->libdir . '/formslib.php');
+require_once($CFG->libdir . '/adminlib.php');
+require_once($CFG->dirroot . '/user/selector/lib.php');
 
 /**
- * Settings form
+ * Settings form.
  *
  * @package    tool_userdebug
  * @author     Andreas Grabs <moodle@grabs-edv.de>
@@ -32,22 +32,24 @@ require_once($CFG->dirroot.'/user/selector/lib.php');
  */
 class settingsform extends \moodleform {
     /**
-     * Form definition {@see:\moodleform::definition}
+     * Form definition {@see:\moodleform::definition}.
      *
      * @return void
      */
     public function definition() {
         global $CFG;
 
-        $mform =& $this->_form;
+        $mform =&$this->_form;
 
         $mform->addElement('header', 'headergeneral', get_string('debug', 'admin'));
 
-        $debugmode = array(DEBUG_NONE      => get_string('debugnone', 'admin'),
+        $debugmode = [
+            DEBUG_NONE      => get_string('debugnone', 'admin'),
             DEBUG_MINIMAL   => get_string('debugminimal', 'admin'),
             DEBUG_NORMAL    => get_string('debugnormal', 'admin'),
             DEBUG_ALL       => get_string('debugall', 'admin'),
-            DEBUG_DEVELOPER => get_string('debugdeveloper', 'admin'));
+            DEBUG_DEVELOPER => get_string('debugdeveloper', 'admin'),
+        ];
 
         $mform->addElement('select', 'debugmode', get_string('debugmode', 'tool_userdebug'), $debugmode);
         $mform->setType('debugmode', PARAM_INT);
@@ -102,7 +104,7 @@ class settingsform extends \moodleform {
     }
 
     /**
-     * Get the form as rendered html output. {@see:\moodleform}
+     * Get the form as rendered html output. {@see:\moodleform}.
      *
      * @return string The html output
      */
@@ -111,6 +113,7 @@ class settingsform extends \moodleform {
         $this->display();
         $output = ob_get_contents();
         ob_end_clean();
+
         return $output;
     }
 }

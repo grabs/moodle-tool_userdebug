@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Set the adhoc debug
+ * Set the adhoc debug.
  *
  * @package    tool_userdebug
  * @author     Andreas Grabs <moodle@grabs-edv.de>
@@ -25,14 +25,14 @@
 
 use tool_userdebug\util;
 
-require_once(dirname(__FILE__).'/../../../config.php');
+require_once(__DIR__ . '/../../../config.php');
 
 require_login();
 $context = \context_system::instance();
 require_capability('tool/userdebug:adhocdebug', $context);
 
 $returnpath = optional_param('returnpath', '/', PARAM_URL);
-$returnurl = new \moodle_url($returnpath);
+$returnurl  = new \moodle_url($returnpath);
 
 $myurl = new \moodle_url($FULLME);
 $myurl->remove_all_params();
