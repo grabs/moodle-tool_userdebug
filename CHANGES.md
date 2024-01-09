@@ -1,5 +1,8 @@
 ## Release notes
 
+### Release v4.3.1
+* Check the realuser from \core\session\manager::get_realuser() to have debugging in "loginas" sessions too.
+
 ### Release v4.3
 * Add icon for ad hoc debuggin to the usernavigation on top of the page.
 * Adjust new coding style rules for arrays.

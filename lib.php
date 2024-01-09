@@ -48,7 +48,9 @@ function tool_userdebug_after_config() {
  * @return string HTML for the navbar
  */
 function tool_userdebug_render_navbar_output() {
-    if (!has_capability('tool/userdebug:adhocdebug', \context_system::instance())) {
+    // We use the realuser instead of the current user, so we can have debugging in "loginas" sessions too.
+    $realuser = \core\session\manager::get_realuser();
+    if (!has_capability('tool/userdebug:adhocdebug', \context_system::instance(), $realuser)) {
         return '';
     }
     return util::create_nav_action();
@@ -62,9 +64,12 @@ function tool_userdebug_render_navbar_output() {
  * @param context_course  $context    The context of the course
  */
 function tool_userdebug_extend_navigation_frontpage(navigation_node $parentnode, stdClass $course, context_course $context) {
-    if (!has_capability('tool/userdebug:adhocdebug', \context_system::instance())) {
+    // We use the realuser instead of the current user, so we can have debugging in "loginas" sessions too.
+    $realuser = \core\session\manager::get_realuser();
+    if (!has_capability('tool/userdebug:adhocdebug', \context_system::instance(), $realuser)) {
         return;
     }
+
     $parentnode->add_node(util::get_settings_node());
 }
 
@@ -80,7 +85,10 @@ function tool_userdebug_extend_navigation_frontpage(navigation_node $parentnode,
  */
 function tool_userdebug_extend_navigation_user_settings(navigation_node $parentnode, stdClass $user, context_user $context,
     stdClass $course, context_course $coursecontext) {
-    if (!has_capability('tool/userdebug:adhocdebug', \context_system::instance())) {
+
+    // We use the realuser instead of the current user, so we can have debugging in "loginas" sessions too.
+    $realuser = \core\session\manager::get_realuser();
+    if (!has_capability('tool/userdebug:adhocdebug', \context_system::instance(), $realuser)) {
         return;
     }
 

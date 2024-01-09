@@ -62,16 +62,19 @@ class util {
 
         $debugactive = false;
 
+        // We use the realuser instead of the current user, so we can have debugging in "loginas" sessions too.
+        $realuser = \core\session\manager::get_realuser();
+
         if ($userdebug = optional_param('userdebug', false, PARAM_BOOL)) {
             $context = \context_system::instance();
-            if (has_capability('tool/userdebug:adhocdebug', $context)) {
+            if (has_capability('tool/userdebug:adhocdebug', $context, $realuser)) {
                 static::set_adhoc_debug(true);
             }
         }
 
         if (!empty($CFG->tool_userdebug_users)) {
             $userids = explode(',', $CFG->tool_userdebug_users);
-            if (in_array($USER->id, $userids, true)) {
+            if (in_array($realuser->id, $userids, true)) {
                 $debugactive = true;
             }
         }

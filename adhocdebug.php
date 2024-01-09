@@ -28,8 +28,12 @@ use tool_userdebug\util;
 require_once(__DIR__ . '/../../../config.php');
 
 require_login();
+
+// We use the realuser instead of the current user, so we can have debugging in "loginas" sessions too.
+$realuser = \core\session\manager::get_realuser();
+
 $context = \context_system::instance();
-require_capability('tool/userdebug:adhocdebug', $context);
+require_capability('tool/userdebug:adhocdebug', $context, $realuser);
 
 $returnpath = optional_param('returnpath', '/', PARAM_URL);
 $returnurl  = new \moodle_url($returnpath);
