@@ -43,7 +43,7 @@ jobs:
         moodlebranch: ['MOODLE_401_STABLE', 'MOODLE_402_STABLE', 'MOODLE_403_STABLE']
         include:
           - php: '8.2'
-            moodle-branch: 'MOODLE_403_STABLE'
+            moodlebranch: 'MOODLE_403_STABLE'
             database: 'pgsql'
 
     steps:
