@@ -36,7 +36,6 @@ class debugsettings implements \templatable, \renderable {
     public function __construct(\tool_userdebug\settingsform $form) {
         $this->data       = new \stdClass();
         $this->data->form = $form->get_output();
-        $this->data->open = !empty($_COOKIE['debugsettingsopen']) ? $_COOKIE['debugsettingsopen'] : '';
     }
 
     /**
