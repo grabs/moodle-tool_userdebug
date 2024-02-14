@@ -60,6 +60,8 @@ class util {
     public static function setdebug() {
         global $CFG, $USER, $SESSION;
 
+        static $notified = false;
+
         $debugactive = false;
 
         // We use the realuser instead of the current user, so we can have debugging in "loginas" sessions too.
@@ -93,6 +95,18 @@ class util {
             ini_set('display_errors', '0');
             ini_set('log_errors', '1');
         }
+
+        if (!AJAX_SCRIPT && !WS_SERVER && !$notified) {
+            $url = new \moodle_url('/admin/tool/userdebug/index.php');
+            $link = \html_writer::link($url, get_string('pluginname', 'tool_userdebug'));
+            $notification = get_string('debugactive', 'tool_userdebug');
+            if (is_siteadmin()) {
+                $notification .= get_string('debugactivechange', 'tool_userdebug', $link);
+            }
+            \core\notification::warning($notification);
+            $notified = true;
+        }
+
     }
 
     /**
