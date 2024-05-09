@@ -1,0 +1,16 @@
+div.tool-userdebug-infobox {
+    position: fixed;
+    z-index: 20000;
+    right: 1em;
+    bottom: 1em;
+    max-width: 300px;
+    min-width: 300px;
+}
+
+div.tool-userdebug-infobox.transparent {
+    opacity: 0.3;
+}
+
+div.tool-userdebug-infobox.transparent:hover {
+    opacity: 1;
+}

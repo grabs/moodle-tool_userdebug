@@ -33,8 +33,10 @@ if (!is_siteadmin()) {
     die;
 }
 
-if (empty($CFG->tool_userdebug_users)) {
-    $CFG->tool_userdebug_users = '';
+$mycfg = get_config('tool_userdebug');
+
+if (empty($mycfg->users)) {
+    $mycfg->users = '';
 }
 
 $settingsform = new \tool_userdebug\settingsform();
@@ -48,7 +50,7 @@ if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
     if ($userstoadd = $potentialdebuguserselector->get_selected_users()) {
         $usertoadd  = reset($userstoadd);
         $debugusers = [];
-        foreach (explode(',', $CFG->tool_userdebug_users) as $du) {
+        foreach (explode(',', $mycfg->users) as $du) {
             $du = (int) $du;
             if ($du) {
                 $debugusers[$du] = $du;
@@ -56,7 +58,7 @@ if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
         }
 
         $debugusers[$usertoadd->id] = $usertoadd->id;
-        set_config('tool_userdebug_users', implode(',', $debugusers));
+        set_config('users', implode(',', $debugusers), 'tool_userdebug');
         redirect($PAGE->url);
         die;
     }
@@ -64,14 +66,14 @@ if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
     if ($userstoremove = $debuguserselector->get_selected_users()) {
         $usertoremove = reset($userstoremove);
         $debugusers   = [];
-        foreach (explode(',', $CFG->tool_userdebug_users) as $du) {
+        foreach (explode(',', $mycfg->users) as $du) {
             $du = (int) $du;
             if ($du) {
                 $debugusers[$du] = $du;
             }
         }
         unset($debugusers[$usertoremove->id]);
-        set_config('tool_userdebug_users', implode(',', $debugusers));
+        set_config('users', implode(',', $debugusers), 'tool_userdebug');
         redirect($PAGE->url);
     }
 }

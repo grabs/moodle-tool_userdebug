@@ -29,8 +29,8 @@ class potential_selector extends \user_selector_base {
      * Constructor.
      */
     public function __construct() {
-        global $CFG, $USER;
-        $admins = clean_param_array(explode(',', $CFG->tool_userdebug_users), PARAM_INT);
+        $mycfg = get_config('tool_userdebug');
+        $admins = clean_param_array(explode(',', $mycfg->users ?? ''), PARAM_INT);
         parent::__construct('addselect', ['multiselect' => false, 'exclude' => $admins]);
     }
 

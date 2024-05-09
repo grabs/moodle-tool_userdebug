@@ -24,11 +24,12 @@
  */
 $string['adhocdebug']           = 'Ad hoc debug ({$a})';
 $string['current_debugusers']   = 'Current debug users';
+$string['debugactiv']           = 'User debug mode is active!';
 $string['debugimap']            = 'Debug imap';
 $string['debugmode']            = 'Debug mode';
-$string['debugsmtp']            = 'Debug smtp';
 $string['debugoptions']         = 'Debug options';
+$string['debugsmtp']            = 'Debug smtp';
 $string['manage_debugusers']    = 'Manage debug users';
 $string['pluginname']           = 'User related debugmodus';
-$string['privacy:metadata']     = 'The plugin "User related debugmodus" does not store any personal data. But it sets a cookie "debugsettingsopen" for convenience.';
+$string['privacy:metadata']     = 'The plugin "User related debugmodus" does not store any personal data.';
 $string['userdebug:adhocdebug'] = 'Use ad hoc debugging';

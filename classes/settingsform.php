@@ -37,7 +37,6 @@ class settingsform extends \moodleform {
      * @return void
      */
     public function definition() {
-        global $CFG;
         $mycfg = get_config('tool_userdebug');
 
         $mform =&$this->_form;

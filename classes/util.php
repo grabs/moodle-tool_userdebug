@@ -53,12 +53,13 @@ class util {
     }
 
     /**
-     * Activate the debug mode for the current user if he is defined in $CFG->tool_userdebug_users {@see:static::enable_debugging}.
+     * Activate the debug mode for the current user if he is defined in $mycfg->users {@see:static::enable_debugging}.
      *
      * @return void
      */
     public static function setdebug() {
-        global $CFG, $USER, $SESSION;
+        global $SESSION;
+        $mycfg = get_config('tool_userdebug');
 
         $debugactive = false;
 
@@ -72,8 +73,8 @@ class util {
             }
         }
 
-        if (!empty($CFG->tool_userdebug_users)) {
-            $userids = explode(',', $CFG->tool_userdebug_users);
+        if (!empty($mycfg->users)) {
+            $userids = explode(',', $mycfg->users);
             if (in_array($realuser->id, $userids, true)) {
                 $debugactive = true;
             }
@@ -86,23 +87,45 @@ class util {
             return;
         }
 
-        static::enable_debugging();
+        $debugcfg = static::enable_debugging();
 
-        if (NO_DEBUG_DISPLAY) {
+        if (defined('NO_DEBUG_DISPLAY') && NO_DEBUG_DISPLAY) {
             // Some parts of Moodle cannot display errors and debug at all.
             ini_set('display_errors', '0');
             ini_set('log_errors', '1');
         }
+
+        // After debugging is set, we display a nice info box to show the user, some infos about the debug mode.
+        if (!AJAX_SCRIPT && !WS_SERVER) {
+            global $PAGE;
+
+            // Prepare the content for the infobox.
+            $debugsettings = [];
+            $infocontent = new \stdClass();
+            foreach ($debugcfg as $key => $value) {
+                $debugsettings[] = (object) [
+                    'key' => $key,
+                    'value' => $value,
+                ];
+            }
+            $infocontent->debugsettings = $debugsettings;
+            if (is_siteadmin()) { // For site admins the link to the setting should be shown.
+                $manageurl = new \moodle_url('/admin/tool/userdebug/index.php');
+                $infocontent->manageurl = $manageurl->out();
+            }
+            // Load the box by javascript.
+            $PAGE->requires->js_call_amd('tool_userdebug/debuginfo', 'init', [$infocontent]);
+        }
+
     }
 
     /**
      * Enables the debugging.
      * All defined settings will be stored in $CFG and also in $CFG->config_php_settings to prevent saving this for other users.
      *
-     * @return void
+     * @return \stdClass
      */
     public static function enable_debugging() {
-        global $CFG;
         $mycfg = get_config('tool_userdebug');
 
         $debugcfg = new \stdClass();
@@ -128,6 +151,7 @@ class util {
         }
 
         static::set_debug_in_cfg($debugcfg);
+        return $debugcfg;
     }
 
     /**

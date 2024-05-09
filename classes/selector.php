@@ -29,7 +29,6 @@ class selector extends \user_selector_base {
      * Constructor.
      */
     public function __construct() {
-        global $CFG, $USER;
         parent::__construct('removeselect', ['multiselect' => false]);
     }
 
@@ -40,13 +39,13 @@ class selector extends \user_selector_base {
      * @return array()
      */
     public function find_users($search) {
-        global $DB, $CFG;
+        global $DB;
+        $mycfg = get_config('tool_userdebug');
         list($wherecondition, $params1) = $this->search_sql($search, '');
 
         $fields      = 'SELECT ' . $this->required_fields_sql('');
-        $countfields = 'SELECT COUNT(1)';
 
-        $tooluserdebugusers      = clean_param_array(explode(',', $CFG->tool_userdebug_users), PARAM_INT);
+        $tooluserdebugusers      = clean_param_array(explode(',', $mycfg->users ?? ''), PARAM_INT);
         list($debugid, $params2) = $DB->get_in_or_equal($tooluserdebugusers, SQL_PARAMS_NAMED, 'val');
 
         if ($wherecondition) {

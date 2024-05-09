@@ -27,24 +27,7 @@
 
     Example context (json):
     {
-        "form": "<div>...</div>",
-        "open": "1"
+        "form": "<div>...</div>"
     }
 }}
-<a class="btn btn-primary" data-toggle="collapse" href="#settings-{{uniqid}}" role="button" aria-expanded="false" aria-controls="settings-{{uniqid}}">
-    <i class="fa fa-cog"></i> {{#str}} debugoptions, tool_userdebug {{/str}}
-</a>
-
-<div class="collapse{{#open}} show{{/open}}" id="settings-{{uniqid}}">
-    {{{form}}}
-</div>
-{{#js}}
-    require(['jquery'], function($) {
-        $('#settings-{{uniqid}}').on('show.bs.collapse', function() {
-            document.cookie = 'debugsettingsopen=1';
-        });
-        $('#settings-{{uniqid}}').on('hide.bs.collapse', function() {
-            document.cookie = 'debugsettingsopen=0';
-        });
-    });
-{{/js}}
+{{{form}}}
