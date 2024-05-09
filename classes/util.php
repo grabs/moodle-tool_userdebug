@@ -103,25 +103,26 @@ class util {
      */
     public static function enable_debugging() {
         global $CFG;
+        $mycfg = get_config('tool_userdebug');
 
         $debugcfg = new \stdClass();
 
-        if (!empty($CFG->tool_userdebug_mode)) {
-            error_reporting($CFG->tool_userdebug_mode);
-            $debugcfg->debug          = $CFG->tool_userdebug_mode;
+        if (!empty($mycfg->mode)) {
+            error_reporting($mycfg->mode);
+            $debugcfg->debug          = $mycfg->mode;
             $debugcfg->debugdeveloper = (($debugcfg->debug & DEBUG_DEVELOPER) === DEBUG_DEVELOPER);
         }
 
-        $debugcfg->debugsmtp     = !empty($CFG->tool_userdebug_debugsmtp);
-        $debugcfg->debugimap     = !empty($CFG->tool_userdebug_debugimap);
-        $debugcfg->perfdebug     = !empty($CFG->tool_userdebug_perfdebug) ? $CFG->tool_userdebug_perfdebug : 0;
-        $debugcfg->debugpageinfo = !empty($CFG->tool_userdebug_debugpageinfo);
+        $debugcfg->debugsmtp     = !empty($mycfg->debugsmtp);
+        $debugcfg->debugimap     = !empty($mycfg->debugimap);
+        $debugcfg->perfdebug     = !empty($mycfg->perfdebug) ? $mycfg->perfdebug : 0;
+        $debugcfg->debugpageinfo = !empty($mycfg->debugpageinfo);
 
-        if (!empty($CFG->tool_userdebug_debugstringids)) {
-            $debugcfg->debugstringids = $CFG->tool_userdebug_debugstringids;
+        if (!empty($mycfg->debugstringids)) {
+            $debugcfg->debugstringids = $mycfg->debugstringids;
             $_GET['strings']          = 1;
         }
-        if (!empty($CFG->tool_userdebug_debugdisplay)) {
+        if (!empty($mycfg->debugdisplay)) {
             ini_set('display_errors', '1');
             $debugcfg->debugdisplay = true;
         }

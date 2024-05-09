@@ -5,10 +5,10 @@ Feature: Switch to adhoc debugging
 
   Background:
     Given the following config values are set as admin:
-      | tool_userdebug_mode           | 32767 |
-      | tool_userdebug_debugdisplay   | 1     |
-      | tool_userdebug_debugstringids | 1     |
-      | tool_userdebug_perfdebug      | 15    |
+      | mode           | 32767 | tool_userdebug |
+      | debugdisplay   | 1     | tool_userdebug |
+      | debugstringids | 1     | tool_userdebug |
+      | perfdebug      | 15    | tool_userdebug |
     And the following "roles" exist:
       | name      | shortname | description | archetype |
       | DebugUser | debuguser | debuguser   |           |

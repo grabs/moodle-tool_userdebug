@@ -86,13 +86,13 @@ if (!empty($formdata->savechanges)) {
     $debugpageinfo  = !empty($formdata->debugpageinfo);
 
     if ($debugmode !== false) {
-        set_config('tool_userdebug_mode', $debugmode);
-        set_config('tool_userdebug_debugdisplay', $debugdisplay);
-        set_config('tool_userdebug_debugsmtp', $debugsmtp);
-        set_config('tool_userdebug_debugimap', $debugimap);
-        set_config('tool_userdebug_perfdebug', $perfdebug);
-        set_config('tool_userdebug_debugstringids', $debugstringids);
-        set_config('tool_userdebug_debugpageinfo', $debugpageinfo);
+        set_config('mode', $debugmode, 'tool_userdebug');
+        set_config('debugdisplay', $debugdisplay, 'tool_userdebug');
+        set_config('debugsmtp', $debugsmtp, 'tool_userdebug');
+        set_config('debugimap', $debugimap, 'tool_userdebug');
+        set_config('perfdebug', $perfdebug, 'tool_userdebug');
+        set_config('debugstringids', $debugstringids, 'tool_userdebug');
+        set_config('debugpageinfo', $debugpageinfo, 'tool_userdebug');
     }
     redirect($PAGE->url, get_string('changessaved'), 3);
 }

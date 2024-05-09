@@ -1,5 +1,8 @@
 ## Release notes
 
+### Release v4.4
+* Move legacy style config settings to plugin config settings
+
 ### Release v4.3.1
 * Check the realuser from \core\session\manager::get_realuser() to have debugging in "loginas" sessions too.
 
