@@ -15,17 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version definition.
+ * Hook callbacks for user related debug mode
  *
  * @package    tool_userdebug
- * @author     Andreas Grabs <moodle@grabs-edv.de>
- * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
+ * @copyright  2024 Andreas Grabs
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2024101900;
-$plugin->release   = 'v4.5 (2024101900)';
-$plugin->requires  = 2024100100;
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->component = 'tool_userdebug';
+defined('MOODLE_INTERNAL') || die();
+
+$callbacks = [
+    [
+        'hook' => \core\hook\after_config::class,
+        'callback' => [\tool_userdebug\hook_callbacks::class, 'after_config'],
+    ],
+];

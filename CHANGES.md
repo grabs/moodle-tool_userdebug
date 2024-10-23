@@ -1,5 +1,8 @@
 ## Release notes
 
+### Release v4.5
+* Implement new hook api (after_config)
+
 ### Release v4.4
 * Move legacy style config settings to plugin config settings
 * Remove toggle button for debug settings

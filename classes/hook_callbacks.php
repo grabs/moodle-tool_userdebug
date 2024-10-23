@@ -14,18 +14,29 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace tool_userdebug;
+
 /**
- * Version definition.
+ * Callbacks for hooks.
  *
  * @package    tool_userdebug
- * @author     Andreas Grabs <moodle@grabs-edv.de>
- * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
+ * @copyright  2024 Andreas Grabs <moodle@grabs-edv.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die;
+class hook_callbacks {
+    /**
+     * Listener for the after_config hook.
+     *
+     * @param \core\hook\after_config $hook
+     */
+    public static function after_config(\core\hook\after_config $hook): void {
+        global $CFG;
 
-$plugin->version   = 2024101900;
-$plugin->release   = 'v4.5 (2024101900)';
-$plugin->requires  = 2024100100;
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->component = 'tool_userdebug';
+        if (during_initial_install() || isset($CFG->upgraderunning)) {
+            // Do nothing during installation or upgrade.
+            return;
+        }
+
+        \tool_userdebug\util::setdebug();
+    }
+}

@@ -32,15 +32,6 @@ if (defined('ABORT_AFTER_CONFIG')) {
 }
 
 /**
- * Hook function is called at the end of setup.php.
- *
- * @return void
- */
-function tool_userdebug_after_config() {
-    tool_userdebug\util::setdebug();
-}
-
-/**
  * Allow plugins to provide some content to be rendered in the navbar.
  * The plugin must define a PLUGIN_render_navbar_output function that returns
  * the HTML they wish to add to the navbar.
