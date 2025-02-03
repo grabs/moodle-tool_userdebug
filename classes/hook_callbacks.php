@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace tool_userdebug;
+use core_user\hook\extend_user_menu;
+
 
 /**
  * Callbacks for hooks.
@@ -38,5 +40,16 @@ class hook_callbacks {
         }
 
         \tool_userdebug\util::setdebug();
+    }
+
+    /**
+     * This is the hook enables the plugin to add one or more menu item.
+     *
+     * @param extend_user_menu $hook
+     */
+    public static function extend_user_menu(extend_user_menu $hook): void {
+        global $CFG;
+        $navitems = util::add_menuuser();
+        $hook->add_navitem($navitems);
     }
 }

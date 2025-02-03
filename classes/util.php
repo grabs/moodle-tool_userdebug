@@ -16,6 +16,12 @@
 
 namespace tool_userdebug;
 
+
+use action_link;
+use moodle_url;
+use popup_action;
+use stdClass;
+
 /**
  * Utility class to manage the user defined debuging mode.
  *
@@ -224,6 +230,24 @@ class util {
         $content->url = $navigationnode->action;
         $content->icon = $OUTPUT->render($navigationnode->icon);
         return $OUTPUT->render_from_template('tool_userdebug/navbar_action', $content);
+    }
+
+    /**
+     * Add an item in the navigation menu.
+     *
+     * @return stdClass The navigation item.
+     */
+    public static function add_menuuser(): stdClass {
+        if (!$navigationnode = static::get_settings_node()) {
+            return '';
+        }
+
+        $content = new \stdClass();
+        $content->itemtype = 'link';
+        $content->title = $navigationnode->text;
+        $content->url = $navigationnode->action;
+
+        return $content;
     }
 
 }
