@@ -1,5 +1,8 @@
 ## Release notes
 
+### Release v4.4.1
+* Do not show info box without real debug settings (#15)
+
 ### Release v4.4
 * Move legacy style config settings to plugin config settings
 * Remove toggle button for debug settings
