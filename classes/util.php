@@ -103,18 +103,25 @@ class util {
             $debugsettings = [];
             $infocontent = new \stdClass();
             foreach ($debugcfg as $key => $value) {
+                if (!empty($value)) {
+                    $showdebuginfo = true;
+                }
                 $debugsettings[] = (object) [
                     'key' => $key,
                     'value' => $value,
                 ];
             }
-            $infocontent->debugsettings = $debugsettings;
-            if (is_siteadmin()) { // For site admins the link to the setting should be shown.
-                $manageurl = new \moodle_url('/admin/tool/userdebug/index.php');
-                $infocontent->manageurl = $manageurl->out();
+
+            // Show the debug info box only if at leas one debug setting is active or the adhoc debug mode is used.
+            if (!empty($showdebuginfo) || static::is_adhoc_debug()) {
+                $infocontent->debugsettings = $debugsettings;
+                if (is_siteadmin()) { // For site admins the link to the setting should be shown.
+                    $manageurl = new \moodle_url('/admin/tool/userdebug/index.php');
+                    $infocontent->manageurl = $manageurl->out();
+                }
+                // Load the box by javascript.
+                $PAGE->requires->js_call_amd('tool_userdebug/debuginfo', 'init', [$infocontent]);
             }
-            // Load the box by javascript.
-            $PAGE->requires->js_call_amd('tool_userdebug/debuginfo', 'init', [$infocontent]);
         }
 
     }
