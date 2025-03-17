@@ -1,5 +1,9 @@
 ## Release notes
 
+### Release v4.5.1
+* Do not show info box without real debug settings (#15)
+* Add ad hoc debug button to user menu (#16)
+
 ### Release v4.5
 * Implement new hook api (after_config)
 
