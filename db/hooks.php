@@ -28,10 +28,11 @@ $callbacks = [
     [
         'hook' => \core\hook\after_config::class,
         'callback' => [\tool_userdebug\hook_callbacks::class, 'after_config'],
+        'priority' => 500, // We want to set debugging as early as possible.
     ],
     [
         'hook' => core_user\hook\extend_user_menu::class,
-        'callback' => '\tool_userdebug\hook_callbacks::extend_user_menu',
+        'callback' => [\tool_userdebug\hook_callbacks::class, 'extend_user_menu'],
         'priority' => 0,
     ],
 ];

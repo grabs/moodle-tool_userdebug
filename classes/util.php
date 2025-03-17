@@ -16,12 +16,6 @@
 
 namespace tool_userdebug;
 
-
-use action_link;
-use moodle_url;
-use popup_action;
-use stdClass;
-
 /**
  * Utility class to manage the user defined debuging mode.
  *
@@ -235,11 +229,11 @@ class util {
     /**
      * Add an item in the navigation menu.
      *
-     * @return stdClass The navigation item.
+     * @return ?\stdClass The navigation item.
      */
-    public static function add_menuuser(): stdClass {
+    public static function add_menuuser(): ?\stdClass {
         if (!$navigationnode = static::get_settings_node()) {
-            return '';
+            return null;
         }
 
         $content = new \stdClass();
@@ -249,5 +243,4 @@ class util {
 
         return $content;
     }
-
 }

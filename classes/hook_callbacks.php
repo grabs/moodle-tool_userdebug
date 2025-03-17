@@ -16,6 +16,7 @@
 
 namespace tool_userdebug;
 use core_user\hook\extend_user_menu;
+use core\hook\after_config;
 
 
 /**
@@ -29,9 +30,9 @@ class hook_callbacks {
     /**
      * Listener for the after_config hook.
      *
-     * @param \core\hook\after_config $hook
+     * @param after_config $hook
      */
-    public static function after_config(\core\hook\after_config $hook): void {
+    public static function after_config(after_config $hook): void {
         global $CFG;
 
         if (during_initial_install() || isset($CFG->upgraderunning)) {
@@ -48,7 +49,6 @@ class hook_callbacks {
      * @param extend_user_menu $hook
      */
     public static function extend_user_menu(extend_user_menu $hook): void {
-        global $CFG;
         $navitems = util::add_menuuser();
         $hook->add_navitem($navitems);
     }
