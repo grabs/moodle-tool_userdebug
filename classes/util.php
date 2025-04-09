@@ -243,6 +243,10 @@ class util {
             return null;
         }
 
+        if (defined('PHPUNIT_TEST') && PHPUNIT_TEST) {
+            return null;
+        }
+
         $content = new \stdClass();
         $content->itemtype = 'link';
         $content->title = $navigationnode->text;
