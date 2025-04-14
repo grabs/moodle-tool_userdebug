@@ -239,6 +239,11 @@ class util {
      * @return ?\stdClass The navigation item.
      */
     public static function add_menuuser(): ?\stdClass {
+        // Don't add the menuitem if PHPUNIT_TEST is running except we run it self.
+        if (defined('PHPUNIT_TEST') && PHPUNIT_TEST && !defined('TOOL_USERDEBUG_RUN_IN_PHPUNIT_TEST')) {
+            return null;
+        }
+
         if (!$navigationnode = static::get_settings_node()) {
             return null;
         }
