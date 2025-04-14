@@ -143,10 +143,11 @@ class util {
             $debugcfg->debugdeveloper = (($debugcfg->debug & DEBUG_DEVELOPER) === DEBUG_DEVELOPER);
         }
 
-        $debugcfg->debugsmtp     = !empty($mycfg->debugsmtp);
-        $debugcfg->debugimap     = !empty($mycfg->debugimap);
-        $debugcfg->perfdebug     = !empty($mycfg->perfdebug) ? $mycfg->perfdebug : 0;
-        $debugcfg->debugpageinfo = !empty($mycfg->debugpageinfo);
+        $debugcfg->debugsmtp                      = !empty($mycfg->debugsmtp);
+        $debugcfg->debugimap                      = !empty($mycfg->debugimap);
+        $debugcfg->perfdebug                      = !empty($mycfg->perfdebug) ? $mycfg->perfdebug : 0;
+        $debugcfg->debugpageinfo                  = !empty($mycfg->debugpageinfo);
+        $debugcfg->showdeprecatedstyle = !empty($mycfg->showdeprecatedstyle);
 
         if (!empty($mycfg->debugstringids)) {
             $debugcfg->debugstringids = $mycfg->debugstringids;
@@ -168,7 +169,12 @@ class util {
      * @return void
      */
     private static function set_debug_in_cfg($debugcfg) {
-        global $CFG;
+        global $CFG, $PAGE;
+
+        if (!empty($debugcfg->showdeprecatedstyle)) {
+            // If the class 'themedesignermode' is added to the body, all deprecated bootstrap classes will be displayed.
+            $PAGE->add_body_class('themedesignermode');
+        }
 
         foreach ($debugcfg as $setting => $value) {
             $CFG->{$setting} = $value;

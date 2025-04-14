@@ -22,14 +22,16 @@
  * @copyright  2022 Andreas Grabs <moodle@grabs-edv.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$string['adhocdebug']           = 'Ad hoc debug ({$a})';
-$string['current_debugusers']   = 'Current debug users';
-$string['debugactiv']           = 'User debug mode is active!';
-$string['debugimap']            = 'Debug imap';
-$string['debugmode']            = 'Debug mode';
-$string['debugoptions']         = 'Debug options';
-$string['debugsmtp']            = 'Debug smtp';
-$string['manage_debugusers']    = 'Manage debug users';
-$string['pluginname']           = 'User related debugmodus';
-$string['privacy:metadata']     = 'The plugin "User related debugmodus" does not store any personal data.';
-$string['userdebug:adhocdebug'] = 'Use ad hoc debugging';
+$string['adhocdebug']               = 'Ad hoc debug ({$a})';
+$string['current_debugusers']       = 'Current debug users';
+$string['debugactiv']               = 'User debug mode is active!';
+$string['debugimap']                = 'Debug imap';
+$string['debugmode']                = 'Debug mode';
+$string['debugoptions']             = 'Debug options';
+$string['debugsmtp']                = 'Debug smtp';
+$string['manage_debugusers']        = 'Manage debug users';
+$string['pluginname']               = 'User related debugmodus';
+$string['privacy:metadata']         = 'The plugin "User related debugmodus" does not store any personal data.';
+$string['showdeprecatedstyle']      = 'Show deprecated Bootstrap classes';
+$string['showdeprecatedstyle_help'] = 'If activated, the css class "themedesignermode" is injected to the body. This has the effect of displaying the deprecated Bootstrap classes in the user interface.';
+$string['userdebug:adhocdebug']     = 'Use ad hoc debugging';

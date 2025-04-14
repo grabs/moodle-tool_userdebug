@@ -79,13 +79,14 @@ if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
 }
 
 if (!empty($formdata->savechanges)) {
-    $debugmode      = !empty($formdata->debugmode) ? $formdata->debugmode : 0;
-    $debugdisplay   = !empty($formdata->debugdisplay);
-    $debugsmtp      = !empty($formdata->debugsmtp);
-    $debugimap      = !empty($formdata->debugimap);
-    $perfdebug      = !empty($formdata->perfdebug) ? 15 : 0; // Perfdebug needs another value than 1.
-    $debugstringids = !empty($formdata->debugstringids);
-    $debugpageinfo  = !empty($formdata->debugpageinfo);
+    $debugmode                      = !empty($formdata->debugmode) ? $formdata->debugmode : 0;
+    $debugdisplay                   = !empty($formdata->debugdisplay);
+    $debugsmtp                      = !empty($formdata->debugsmtp);
+    $debugimap                      = !empty($formdata->debugimap);
+    $perfdebug                      = !empty($formdata->perfdebug) ? 15 : 0; // Perfdebug needs another value than 1.
+    $debugstringids                 = !empty($formdata->debugstringids);
+    $debugpageinfo                  = !empty($formdata->debugpageinfo);
+    $showdeprecatedstyle = !empty($formdata->showdeprecatedstyle);
 
     if ($debugmode !== false) {
         set_config('mode', $debugmode, 'tool_userdebug');
@@ -95,6 +96,7 @@ if (!empty($formdata->savechanges)) {
         set_config('perfdebug', $perfdebug, 'tool_userdebug');
         set_config('debugstringids', $debugstringids, 'tool_userdebug');
         set_config('debugpageinfo', $debugpageinfo, 'tool_userdebug');
+        set_config('showdeprecatedstyle', $showdeprecatedstyle, 'tool_userdebug');
     }
     redirect($PAGE->url, get_string('changessaved'), 3);
 }

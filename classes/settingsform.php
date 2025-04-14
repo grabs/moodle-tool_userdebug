@@ -99,6 +99,14 @@ class settingsform extends \moodleform {
         );
         $mform->setDefault('debugpageinfo', !empty($mycfg->debugpageinfo));
 
+        $mform->addElement(
+            'checkbox',
+            'showdeprecatedstyle',
+            get_string('showdeprecatedstyle', 'tool_userdebug')
+        );
+        $mform->setDefault('showdeprecatedstyle', !empty($mycfg->showdeprecatedstyle));
+        $mform->addHelpButton('showdeprecatedstyle', 'showdeprecatedstyle', 'tool_userdebug');
+
         // Add the save button.
         $mform->addElement('submit', 'savechanges', get_string('savechanges'));
     }
