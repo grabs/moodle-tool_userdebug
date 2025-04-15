@@ -1,5 +1,9 @@
 ## Release notes
 
+### Release v5.0
+* Fix unit test failing (#17)
+* Add new option to show deprecated styles
+
 ### Release v4.5.1
 * Do not show info box without real debug settings (#15)
 * Add ad hoc debug button to user menu (#16)
