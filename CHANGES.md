@@ -1,5 +1,8 @@
 ## Release notes
 
+### Release v4.5.3
+* Add missing capability check for menu item (#19)
+
 ### Release v4.5.2
 * Fix unit test failing (#17)
 
