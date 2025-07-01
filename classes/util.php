@@ -185,10 +185,16 @@ class util {
     /**
      * Create a settings node for the extended navigation.
      *
-     * @return \navigation_node
+     * @return ?\navigation_node
      */
     public static function get_settings_node() {
         global $PAGE;
+
+        // We use the realuser instead of the current user, so we can have debugging in "loginas" sessions too.
+        $realuser = \core\session\manager::get_realuser();
+        if (!has_capability('tool/userdebug:adhocdebug', \context_system::instance(), $realuser)) {
+            return null;
+        }
 
         $returnpath = $PAGE->url;
         $url        = new \moodle_url('/admin/tool/userdebug/adhocdebug.php', ['returnpath' => $returnpath]);
