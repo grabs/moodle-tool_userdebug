@@ -1,5 +1,8 @@
 ## Release notes
 
+### Release v5.0.1
+* Add missing capability check for menu item (#19)
+
 ### Release v5.0
 * Fix unit test failing (#17)
 * Add new option to show deprecated styles
