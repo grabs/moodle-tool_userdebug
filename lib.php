@@ -39,11 +39,6 @@ if (defined('ABORT_AFTER_CONFIG')) {
  * @return string HTML for the navbar
  */
 function tool_userdebug_render_navbar_output() {
-    // We use the realuser instead of the current user, so we can have debugging in "loginas" sessions too.
-    $realuser = \core\session\manager::get_realuser();
-    if (!has_capability('tool/userdebug:adhocdebug', \context_system::instance(), $realuser)) {
-        return '';
-    }
     return util::create_nav_action();
 }
 
