@@ -61,8 +61,3 @@
         {{#pix}}debugon, tool_userdebug, {{#str}} debugactiv, tool_userdebug {{/str}} {{/pix}}
     </a>
 </div>
-{{#js}}
-    document.querySelector('#closebutton-{{uniqid}}').addEventListener('click', () => {
-        document.querySelector('.tool-userdebug-infobox').remove();
-    });
-{{/js}}
