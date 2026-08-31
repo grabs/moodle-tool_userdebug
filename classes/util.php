@@ -115,7 +115,7 @@ class util {
             // Show the debug info box only if at leas one debug setting is active or the adhoc debug mode is used.
             if (!empty($showdebuginfo) || static::is_adhoc_debug()) {
                 $infocontent->debugsettings = $debugsettings;
-                if (is_siteadmin()) { // For site admins the link to the setting should be shown.
+                if (has_capability('moodle/site:config', \context_system::instance(), $realuser)) {
                     $manageurl = new \moodle_url('/admin/tool/userdebug/index.php');
                     $infocontent->manageurl = $manageurl->out();
                 }

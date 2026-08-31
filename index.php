@@ -29,8 +29,9 @@ require_once($CFG->dirroot . '/' . $CFG->admin . '/tool/userdebug/lib.php');
 require_once($CFG->dirroot . '/' . $CFG->admin . '/roles/lib.php');
 
 admin_externalpage_setup('tool_userdebug', '', null);
-if (!is_siteadmin()) {
-    die;
+
+if (!has_capability('moodle/site:config', context_system::instance())) {
+    return;
 }
 
 $mycfg = get_config('tool_userdebug');
