@@ -34,6 +34,7 @@ $realuser = \core\session\manager::get_realuser();
 
 $context = \context_system::instance();
 require_capability('tool/userdebug:adhocdebug', $context, $realuser);
+require_sesskey();
 
 $returnpath = optional_param('returnpath', '/', PARAM_URL);
 $returnurl  = new \moodle_url($returnpath);

@@ -66,7 +66,9 @@ class util {
         // We use the realuser instead of the current user, so we can have debugging in "loginas" sessions too.
         $realuser = \core\session\manager::get_realuser();
 
-        if ($userdebug = optional_param('userdebug', false, PARAM_BOOL)) {
+        // An empty sesskey would make confirm_sesskey() throw a missing parameter exception on every page.
+        $sesskey = optional_param('sesskey', '', PARAM_RAW);
+        if (optional_param('userdebug', false, PARAM_BOOL) && $sesskey !== '' && confirm_sesskey($sesskey)) {
             $context = \context_system::instance();
             if (has_capability('tool/userdebug:adhocdebug', $context, $realuser)) {
                 static::set_adhoc_debug(true);
@@ -202,7 +204,10 @@ class util {
         }
 
         $returnpath = $PAGE->url;
-        $url        = new \moodle_url('/admin/tool/userdebug/adhocdebug.php', ['returnpath' => $returnpath]);
+        $url        = new \moodle_url(
+            '/admin/tool/userdebug/adhocdebug.php',
+            ['returnpath' => $returnpath, 'sesskey' => sesskey()]
+        );
 
         if (static::is_adhoc_debug()) {
             $pixicon  = 'debugon';

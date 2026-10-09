@@ -109,4 +109,36 @@ final class hook_test extends \advanced_testcase {
         $title = get_string('adhocdebug', 'tool_userdebug', 'off');
         $this->assertStringContainsString($title, $output);
     }
+
+    #[\PHPUnit\Framework\Attributes\Group('baseline')]
+    /**
+     * The userdebug url parameter must not enable the ad hoc debug mode without a valid sesskey.
+     *
+     * @covers \tool_userdebug\util::setdebug
+     * @return void
+     */
+    public function test_setdebug_without_sesskey(): void {
+        $_GET['userdebug'] = 1;
+        util::setdebug();
+        unset($_GET['userdebug']);
+
+        $this->assertFalse(util::is_adhoc_debug());
+    }
+
+    #[\PHPUnit\Framework\Attributes\Group('baseline')]
+    /**
+     * The userdebug url parameter enables the ad hoc debug mode with a valid sesskey.
+     *
+     * @covers \tool_userdebug\util::setdebug
+     * @return void
+     */
+    public function test_setdebug_with_sesskey(): void {
+        $_GET['userdebug'] = 1;
+        $_GET['sesskey'] = sesskey();
+        util::setdebug();
+        unset($_GET['userdebug'], $_GET['sesskey']);
+
+        $this->assertTrue(util::is_adhoc_debug());
+        $this->assertStringContainsString('sesskey=' . sesskey(), util::get_settings_node()->action->out(false));
+    }
 }
