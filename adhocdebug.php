@@ -35,8 +35,8 @@ $realuser = \core\session\manager::get_realuser();
 $context = \context_system::instance();
 require_capability('tool/userdebug:adhocdebug', $context, $realuser);
 
-$returnpath = optional_param('returnpath', '/', PARAM_URL);
-$returnurl  = new \moodle_url($returnpath);
+$returnpath = optional_param('returnpath', '/', PARAM_LOCALURL);
+$returnurl  = new \moodle_url($returnpath ?: '/');
 
 $myurl = new \moodle_url($FULLME);
 $myurl->remove_all_params();
