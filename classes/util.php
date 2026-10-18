@@ -80,7 +80,12 @@ class util {
             }
         }
         if (!empty($SESSION->userdebug)) {
-            $debugactive = true;
+            // Re-check the capability on every request, so a revoked capability ends the ad hoc debug mode.
+            if (has_capability('tool/userdebug:adhocdebug', \context_system::instance(), $realuser)) {
+                $debugactive = true;
+            } else {
+                static::set_adhoc_debug(false);
+            }
         }
 
         if (!$debugactive) {
